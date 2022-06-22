@@ -1,0 +1,57 @@
+
+spring:
+  profiles:
+    active: dev
+
+  output:
+    ansi:
+      enabled: always
+jwt:
+  access:
+    token:
+      expires: '60000'
+  refresh:
+    token:
+      expires: '1500000'
+  secret: 990f8b020d66cb200e21182998c5723d575d9ad502278e4dec6f3913905743af
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/online-shop
+    username: root
+    password: root
+
+  flyway:
+    locations: classpath:db/migration, db/dev
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: test
+
+  datasource:
+    password: root
+    username: root
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1
+
+  flyway:
+    locations: classpath:db/migration, db/test
+---
+
+spring:
+  config:
+    activate:
+      on-profile: testcontainers
+
+  datasource:
+    url: jdbc:tc:postgresql:latest://db
+
+
