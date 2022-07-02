@@ -8,17 +8,13 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Repository
 public interface ProductCartRepository extends JpaRepository<ProductCart, Long> {
 
+    Optional<ProductCart> findByUserId(long id);
 
-    @Modifying
-    @Transactional
-    @Query(value = "DELETE FROM cart_item ci WHERE ci.cart_id = :cartId AND ci.product_id = :productId",
-            nativeQuery = true)
-    void deleteProductByIdFromProductCart(
-            @Param("cartId") Long cartId,
-            @Param("productId") Long productId);
-
+    Optional<ProductCart> findByUserUsername(String username);
 }
+

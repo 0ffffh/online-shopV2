@@ -11,6 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString(exclude = {"user"})
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "product_cart",

@@ -41,6 +41,10 @@ public class UserService implements UserDetailsService {
     public User save(User user) {
         return userRepository.save(user);
     }
+
+    public User findByUsername(String username) {
+        return (User) loadUserByUsername(username);
+    }
 }
 
 

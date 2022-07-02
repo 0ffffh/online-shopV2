@@ -63,13 +63,9 @@ class UserCartControllerIntegrationTest extends AbstractContainer {
     void getClearUserCart() throws Exception {
 
         mockMvc.perform(get("/user/cart").principal(principal))
-                .andExpect(status().isNotFound())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.status").value("NOT_FOUND"))
-                .andExpect(jsonPath("$.message").value("Cart empty"));
+                .andExpect(status().isOk());
 
-        assertThrows(ProductCartNotFoundException.class,
-                () -> cartService.getProductCartByUsername(principal.getName()));
 
     }
 
@@ -78,8 +74,6 @@ class UserCartControllerIntegrationTest extends AbstractContainer {
     @DisplayName("Get UserCart with products ")
     void getUserCartWithProducts() throws Exception {
 
-        assertThrows(ProductCartNotFoundException.class,
-                () -> cartService.getProductCartByUsername(principal.getName()));
 
 
         cartService.addToCart(principal.getName(), 1L);
@@ -103,8 +97,6 @@ class UserCartControllerIntegrationTest extends AbstractContainer {
     @DisplayName("Add product to usercart")
     void addProductToUserCart() throws Exception {
 
-        assertThrows(ProductCartNotFoundException.class,
-                () -> cartService.getProductCartByUsername(principal.getName()));
 
         mockMvc.perform(post("/user/cart/product/{id}", 1)
                         .principal(principal)
@@ -123,7 +115,7 @@ class UserCartControllerIntegrationTest extends AbstractContainer {
 
     @Test
     @DataSet(value = {"users.yml", "roles.yml", "users_roles.yml", "products.yml"})
-    @DisplayName("Delete product throws from usercart")
+    @DisplayName("Delete product from usercart")
     void deleteProductFromUserCart() throws Exception {
 
         cartService.addToCart(principal.getName(), 1L);
@@ -140,17 +132,6 @@ class UserCartControllerIntegrationTest extends AbstractContainer {
 
     }
 
-    @Test
-    @DataSet(value = {"users.yml", "roles.yml", "users_roles.yml", "products.yml"})
-    @DisplayName("Delete product throws ProductNotFoundExexption()")
-    void deleteProductFromUserCartNotFoundThrowProductNotFoundEx() throws Exception {
-
-        mockMvc.perform(delete("/user/cart/product/{id}", 1)
-                        .principal(principal)
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNotFound());
-
-    }
 
     @Test
     @DataSet(value = {"users.yml", "roles.yml", "users_roles.yml", "products.yml"})
@@ -169,8 +150,7 @@ class UserCartControllerIntegrationTest extends AbstractContainer {
                 .andExpect(status().isOk());
 
 
-        assertThrows(ProductCartNotFoundException.class,
-                () -> cartService.getProductCartByUsername(principal.getName()));
+
 
     }
 }

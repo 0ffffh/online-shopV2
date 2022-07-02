@@ -7,10 +7,7 @@ import com.k0s.onlineshop.entity.Product;
 import com.k0s.onlineshop.exceptions.ProductNotFoundException;
 import com.k0s.onlineshop.service.ProductService;
 import com.k0s.onlineshop.testcontainers.AbstractContainer;
-import lombok.Data;
-import org.flywaydb.core.Flyway;
 import org.hamcrest.CoreMatchers;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -113,7 +110,7 @@ class AdminProductControllerIntegrationTest extends AbstractContainer {
 
     @Test
     @DataSet(value = {"products.yml"},
-    executeStatementsBefore = "ALTER SEQUENCE product_sequence RESTART WITH 4")
+            executeStatementsBefore = "ALTER SEQUENCE product_sequence RESTART WITH 4")
     @DisplayName("AdminController DELETE-/admin/product{id} | Delete product")
     void deleteProductByID() throws Exception {
         Product product = Product.builder()
@@ -140,7 +137,6 @@ class AdminProductControllerIntegrationTest extends AbstractContainer {
     }
 
     @Test
-//    @DataSet(value = {"products.yml"}, executeStatementsBefore = "ALTER SEQUENCE product_sequence RESTART WITH 4")
     @DataSet(value = {"products.yml"})
     @DisplayName("AdminController PUT-/admin/product/{id} | Update product with valid params, status OK")
     void updateProductByIDvalidOk() throws Exception {
@@ -170,7 +166,6 @@ class AdminProductControllerIntegrationTest extends AbstractContainer {
     }
 
     @Test
-//    @DataSet(value = {"products.yml"},  executeStatementsBefore = "ALTER SEQUENCE product_sequence RESTART WITH 4")
     @DataSet(value = {"products.yml"})
     @DisplayName("AdminController PUT-/admin/product/{id} | Update product with invalid params, status BAD REQUEST")
     void updateProductByIDinvalidParamsBadReuqest() throws Exception {
@@ -193,7 +188,6 @@ class AdminProductControllerIntegrationTest extends AbstractContainer {
     }
 
     @Test
-//    @DataSet(value = {"products.yml"}, executeStatementsBefore = {"ALTER SEQUENCE product_sequence RESTART WITH 4"})
     @DataSet(value = {"products.yml"})
     @DisplayName("AdminController PUT-/admin/product/{id} | Update product with invalid ID, status NOT FOUND")
     void updateProductByIDinvalidIDNotFound() throws Exception {
