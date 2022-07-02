@@ -1,0 +1,16 @@
+products:
+  - id: 1
+    name: "testProduct1"
+    price: 111.11
+    creation_date: '1111-11-11 11:11:11'
+    description: "testDescription1"
+  - id: 2
+    name: "testProduct2"
+    price: 222.22
+    creation_date: '2222-02-02 02:02:02'
+    description: "testDescription2"
+  - id: 3
+    name: "testProduct3"
+    price: 333.33
+    creation_date: '3333-03-03 03:03:03'
+    description: "testDescription3"

@@ -1,0 +1,7 @@
+roles:
+  - id: 1
+    name: "ROLE_ROOT"
+  - id: 2
+    name: "ROLE_ADMIN"
+  - id: 3
+    name: "ROLE_USER"

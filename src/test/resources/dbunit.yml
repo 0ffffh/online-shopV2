@@ -1,0 +1,8 @@
+caseInsensitiveStrategy: !!com.github.database.rider.core.api.configuration.Orthography 'LOWERCASE'
+cacheConnection: false
+leakHunter: true
+properties:
+  caseSensitiveTableNames: true
+  caseInsensitiveStrategy: LOWERCASE
+  batchSize: 10000
+  fetchSize: 10000

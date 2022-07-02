@@ -1,0 +1,13 @@
+users:
+  - id: 1
+    username: "root"
+    password: "$2a$12$r0E4WXE7E1qocNlS1r5.n.YkdByj2le3DElM4MfO8TWcB9Vfy1Sze"
+    enabled: true
+  - id: 2
+    username: "admin"
+    password: "$2a$12$9lAtYs98R61uuTjMaouInOLVpyWs8wmNKBVFvaR4xlBAnylZUUurq"
+    enabled: true
+  - id: 3
+    username: "user"
+    password: "$2a$12$pGok1ZiVPw4.1Q9bTA4VTuopsyzrUOm3dh2iUzHZ5X1A8WxC.dAYK"
+    enabled: true

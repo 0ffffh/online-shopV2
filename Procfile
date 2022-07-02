@@ -1,0 +1,1 @@
+web: java -Dspring.profiles.active=heroku -Dserver.port=$PORT -jar target/online-shop-0.0.1.jar
