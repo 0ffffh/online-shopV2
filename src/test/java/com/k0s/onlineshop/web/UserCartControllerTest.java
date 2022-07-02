@@ -33,6 +33,7 @@ class UserCartControllerTest {
     @MockBean
     CartService cartService;
     private final ObjectMapper objectMapper = new ObjectMapper();
+
     @MockBean
     Principal principal;
 

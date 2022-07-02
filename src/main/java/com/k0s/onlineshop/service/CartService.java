@@ -31,6 +31,10 @@ public class CartService {
 
 
     public ProductCart getProductCartByUsername(String username) {
+        Optional<ProductCart> optionalProductCart = productCartRepository.findByUserUsername(username);
+        if (optionalProductCart.isPresent()){
+            return optionalProductCart.get();
+        }
         User user = userService.findByUsername(username);
             if(user.getProductCart() == null){
                 return ProductCart.builder()
@@ -52,17 +56,16 @@ public class CartService {
 
     }
 
-    public void removeProductFromCartByProductId(String username, Long productId) {
+    public ProductCart removeProductFromCartByProductId(String username, Long productId) {
         ProductCart productCart = getProductCartByUsername(username);
         productCartRepository.delete(productCart);
         productCart.getProducts().removeIf(product -> product.getId()==productId);
 
-        productCartRepository.save(productCart);
-
+        return productCartRepository.save(productCart);
     }
 
     public void clearCart(String username) {
-        ProductCart productCart = getProductCartByUsername(username);
-        productCartRepository.delete(productCart);
+        Optional<ProductCart> productCart = productCartRepository.findByUserUsername(username);
+        productCart.ifPresent(cart -> productCartRepository.delete(cart));
     }
 }

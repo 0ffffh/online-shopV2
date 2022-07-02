@@ -2,12 +2,17 @@ package com.k0s.onlineshop.service;
 
 import com.k0s.onlineshop.entity.Product;
 import com.k0s.onlineshop.exceptions.ProductNotFoundException;
+import com.k0s.onlineshop.repository.ProductCartRepository;
 import com.k0s.onlineshop.repository.ProductRepository;
+import com.k0s.onlineshop.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 
@@ -18,13 +23,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
-@SpringBootTest
+@SpringBootTest()
 @ActiveProfiles("test")
+@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
 class ProductServiceTest {
     @Autowired
     private ProductService productService;
     @MockBean
-    ProductRepository productRepository;
+    private ProductRepository productRepository;
+    @MockBean
+    private UserRepository userRepository;
+    @MockBean
+    private ProductCartRepository productCartRepository;
     private Product product;
 
     @BeforeEach

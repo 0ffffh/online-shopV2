@@ -1,11 +1,15 @@
 package com.k0s.onlineshop.service;
 
+import com.k0s.onlineshop.repository.ProductCartRepository;
+import com.k0s.onlineshop.repository.ProductRepository;
 import com.k0s.onlineshop.repository.UserRepository;
 import com.k0s.onlineshop.security.user.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -20,11 +24,17 @@ import static org.mockito.Mockito.*;
 
 @SpringBootTest
 @ActiveProfiles("test")
+@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
+
 class UserServiceTest {
     @Autowired
     private UserService userService;
     @MockBean
     private UserRepository userRepository;
+    @MockBean
+    private ProductCartRepository productCartRepository;
+    @MockBean
+    private ProductRepository productRepository;
     @MockBean
     private User user;
 
